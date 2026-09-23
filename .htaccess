@@ -1,0 +1,19 @@
+DirectoryIndex index.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Backend and uploaded files must never be handled by the Flutter SPA.
+  RewriteRule ^(?:api|uploads)(?:/|$) - [L,NC]
+
+  # Keep crawler files directly accessible when deployed in the document root.
+  RewriteRule ^(?:robots\.txt|sitemap\.xml)$ - [L,NC]
+
+  # Serve existing Flutter assets and every other real file/directory normally.
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Public clean URLs are resolved by Flutter Navigator 1.0.
+  RewriteRule ^ index.html [L]
+</IfModule>
