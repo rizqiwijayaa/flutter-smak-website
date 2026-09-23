@@ -421,4 +421,4 @@ Politeknik Negeri Malang PSDKU Lumajang
 
 ---
 
-Built with 💙 using **Flutter**.
+Built with 💙💙💙 using **Flutter**.
