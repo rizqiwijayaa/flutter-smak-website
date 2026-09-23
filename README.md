@@ -162,95 +162,59 @@ Project dipisahkan berdasarkan fungsi frontend, backend, database, dan dokumenta
 ```text
 website_smak/
 │
-├── api/                     # Backend PHP dan API
-│   ├── config.php           # Konfigurasi koneksi database
-│   ├── index.php            # Endpoint utama API
-│   └── uploads/             # Penyimpanan media yang diunggah
+├── api/
+│   ├── config.php
+│   ├── index.php
+│   └── uploads/
 │
-├── assets/                  # Asset statis aplikasi
+├── assets/
 │
-├── database/                # SQL dan migration database
+├── database/
 │
-├── docs/                    # Dokumentasi pendukung project
+├── docs/
 │
-├── lib/                     # Source code utama Flutter
+├── lib/
 │   │
-│   ├── admin/               # Seluruh halaman Admin Dashboard
-│   │   ├── akademik/        # Pengelolaan konten akademik
-│   │   ├── berita/          # Pengelolaan berita
-│   │   ├── dashboard/       # Halaman utama administrator
-│   │   ├── galeri/          # Pengelolaan galeri dan media
-│   │   ├── kesiswaan/       # Pengelolaan konten kesiswaan
-│   │   ├── kontak/          # Pengelolaan informasi kontak
+│   ├── admin/
+│   │   ├── akademik/
+│   │   ├── berita/
+│   │   ├── dashboard/
+│   │   ├── galeri/
+│   │   ├── kesiswaan/
+│   │   ├── kontak/
 │   │   ├── pengaturan_website/
-│   │   │                    # Konfigurasi dan pengaturan website
-│   │   ├── pengguna/        # Pengelolaan pengguna/admin
-│   │   ├── ppdb/            # Pengelolaan informasi PPDB
-│   │   ├── profil/          # Pengelolaan profil sekolah
-│   │   └── shared/          # Komponen bersama Admin Dashboard
+│   │   ├── pengguna/
+│   │   ├── ppdb/
+│   │   ├── profil/
+│   │   └── shared/
 │   │
-│   ├── landing_page/        # Halaman website publik
-│   ├── routing/             # Navigasi dan konfigurasi URL
-│   ├── services/            # Komunikasi frontend dengan API
-│   └── main.dart            # Entry point aplikasi Flutter
+│   ├── landing_page/
+│   │   ├── beranda/
+│   │   ├── profil/
+│   │   ├── akademik/
+│   │   ├── kesiswaan/
+│   │   ├── berita/
+│   │   ├── galeri/
+│   │   ├── ppdb/
+│   │   └── kontak/
+│   │
+│   ├── routing/
+│   ├── services/
+│   └── main.dart
 │
-├── test/                    # Automated testing Flutter
-├── web/                     # Konfigurasi Flutter Web
-├── android/                 # Konfigurasi platform Android
-├── ios/                     # Konfigurasi platform iOS
-├── linux/                   # Konfigurasi platform Linux
-├── macos/                   # Konfigurasi platform macOS
-├── windows/                 # Konfigurasi platform Windows
+├── test/
+├── web/
+├── android/
+├── ios/
+├── linux/
+├── macos/
+├── windows/
 │
-├── pubspec.yaml             # Dependency dan konfigurasi Flutter
-└── README.md                # Dokumentasi repository
+├── pubspec.yaml
+└── README.md
 ```
 
-### Penjelasan Bagian Utama
-
-#### `lib/` — Flutter Frontend
-
-Berisi source code utama aplikasi Flutter.
-
-Di dalamnya terdapat website publik yang digunakan oleh pengunjung dan Admin Dashboard yang digunakan administrator untuk mengelola website.
-
-#### `lib/admin/` — Admin Dashboard
-
-Berisi halaman dan fitur CMS untuk administrator.
-
-Setiap modul dipisahkan berdasarkan jenis konten, seperti akademik, berita, galeri, kesiswaan, PPDB, profil, pengguna, kontak, hingga Pengaturan Website.
-
-#### `lib/landing_page/` — Website Publik
-
-Berisi halaman yang ditampilkan kepada pengunjung.
-
-Konten halaman publik terintegrasi dengan backend sehingga perubahan yang dilakukan melalui Admin Dashboard dapat ditampilkan secara dinamis.
-
-#### `lib/routing/` — Routing
-
-Mengatur navigasi dan URL halaman pada Flutter Web sehingga halaman publik dapat menggunakan struktur URL yang lebih bersih.
-
-#### `lib/services/` — API Services
-
-Menangani komunikasi antara Flutter dengan backend PHP, termasuk proses mengambil, mengirim, dan memperbarui data.
-
-#### `api/` — PHP Backend
-
-Berfungsi sebagai penghubung antara Flutter Web dan database MySQL.
-
-Backend menangani request dari frontend, autentikasi administrator, pengelolaan data, monitoring aktivitas login, serta proses upload media.
-
-#### `database/` — Database & Migration
-
-Berisi file SQL yang digunakan untuk membuat atau memperbarui struktur database selama proses pengembangan.
-
-#### `assets/` — Assets
-
-Berisi berbagai asset statis yang digunakan oleh aplikasi Flutter.
-
-#### `web/` — Flutter Web Configuration
-
-Berisi konfigurasi yang diperlukan untuk menjalankan dan melakukan build aplikasi sebagai website.
+Struktur `lib/` memisahkan dua bagian utama aplikasi, yaitu **Admin Dashboard** dan **website publik**. Modul pada kedua bagian dipisahkan berdasarkan fungsi sehingga pengembangan dan pemeliharaan source code lebih terorganisir.
 
 ---
 
