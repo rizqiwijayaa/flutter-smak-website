@@ -1,15 +1,21 @@
 # 🏫 Flutter School Website CMS
 
-Website sekolah dinamis yang dibangun menggunakan **Flutter Web**, **PHP API**, dan **MySQL**.
+Website sekolah dinamis yang dibangun menggunakan **Flutter Web**, **PHP**, dan **MySQL**.
 
 Project ini dikembangkan untuk menyediakan website informasi sekolah sekaligus **Content Management System (CMS)** melalui Admin Dashboard. Berbagai konten pada website dapat dikelola secara dinamis tanpa harus mengubah source code frontend secara langsung.
+
+---
 
 ## ✨ Fitur Utama
 
 ### 🌐 Website Publik
 
+Website publik menyediakan berbagai informasi sekolah yang dapat diakses oleh pengunjung.
+
+Fitur yang tersedia meliputi:
+
 - Beranda dengan banner/slider dinamis
-- Profil dan identitas sekolah
+- Profil sekolah
 - Sambutan kepala sekolah
 - Sejarah sekolah
 - Visi dan misi
@@ -32,9 +38,13 @@ Project ini dikembangkan untuk menyediakan website informasi sekolah sekaligus *
 - Responsive layout untuk berbagai ukuran layar
 - Clean URL / routing untuk halaman publik
 
+---
+
 ### 🛠️ Admin Dashboard
 
-Admin Dashboard digunakan untuk mengelola berbagai bagian website secara dinamis.
+Admin Dashboard berfungsi sebagai pusat pengelolaan konten website.
+
+Administrator dapat mengelola berbagai bagian website tanpa perlu melakukan perubahan langsung pada source code Flutter.
 
 Fitur yang tersedia:
 
@@ -55,22 +65,31 @@ Fitur yang tersedia:
 - Validasi dan pembatasan panjang konten
 - Pengaturan Website
 
-### ⚙️ Pengaturan Website
+---
 
-Pengaturan Website menyediakan konfigurasi website melalui Admin Dashboard, meliputi:
+## ⚙️ Pengaturan Website
+
+Menu **Pengaturan Website** digunakan untuk mengatur berbagai konfigurasi website melalui Admin Dashboard.
+
+Pengaturan meliputi:
 
 - Identitas website
-- Pengaturan tampilan
+- Pengaturan tampilan website
 - Pengaturan footer
 - Pengaturan halaman login
 - Pengaturan SEO
 - Pengaturan status website
 - Maintenance mode
-- Pengaturan keamanan dan aktivitas
+- Pengaturan keamanan
+- Informasi aktivitas administrator
+
+Dengan sistem ini, berbagai konfigurasi website dapat dikelola tanpa harus melakukan perubahan langsung pada source code.
+
+---
 
 ## 🔐 Keamanan & Monitoring Login
 
-Sistem administrator dilengkapi dengan pencatatan aktivitas login untuk membantu pemantauan akses ke Admin Dashboard.
+Sistem administrator dilengkapi dengan fitur pencatatan aktivitas login untuk membantu memantau akses ke Admin Dashboard.
 
 Fitur monitoring meliputi:
 
@@ -78,23 +97,33 @@ Fitur monitoring meliputi:
 - Pencatatan login berhasil
 - Pencatatan percobaan login gagal
 - Pencatatan alamat IP pada aktivitas login
-- Informasi aktivitas akses administrator
+- Informasi waktu aktivitas login
+- Monitoring aktivitas akses administrator
 
-Credential database production tidak ditulis langsung di dalam source code. Konfigurasi database mendukung penggunaan **environment variable** sehingga informasi sensitif dapat dipisahkan dari repository.
+Credential database production tidak ditulis langsung di dalam source code.
+
+Konfigurasi backend mendukung penggunaan **environment variable**, sehingga informasi sensitif dapat dipisahkan dari repository.
+
+---
 
 ## 🧰 Teknologi
 
 | Teknologi | Penggunaan |
 | --- | --- |
 | Flutter / Dart | Frontend website dan Admin Dashboard |
-| PHP | Backend / API |
+| PHP | Backend dan API |
 | MySQL | Database |
 | HTML | Entry point dan konfigurasi Flutter Web |
 | Apache / `.htaccess` | Routing dan konfigurasi deployment |
 | LocalStorage | Penyimpanan data tertentu pada browser |
-| cPanel | Deployment website |
+| cPanel | Deployment dan hosting website |
+| Git & GitHub | Version control dan repository project |
 
-## 🏗️ Arsitektur
+---
+
+## 🏗️ Arsitektur Sistem
+
+Project menggunakan arsitektur frontend dan backend yang terpisah.
 
 ```text
                    ┌──────────────────────┐
@@ -120,62 +149,116 @@ Credential database production tidak ditulis langsung di dalam source code. Konf
         └────────────────┘       └────────────────┘
 ```
 
-Frontend berkomunikasi dengan backend melalui API. Data yang tersimpan di database kemudian digunakan untuk membangun konten website secara dinamis.
+Flutter Web bertindak sebagai frontend untuk website publik sekaligus Admin Dashboard.
 
-Administrator dapat memperbarui berbagai bagian website melalui Admin Dashboard tanpa perlu melakukan perubahan langsung pada source code frontend.
+Frontend berkomunikasi dengan backend melalui HTTP request. Backend PHP kemudian menangani proses pengambilan, penyimpanan, dan perubahan data pada database MySQL.
+
+---
 
 ## 📁 Struktur Project
 
+Project dipisahkan berdasarkan fungsi frontend, backend, database, dan dokumentasi agar proses pengembangan serta pemeliharaan lebih terorganisir.
+
 ```text
 website_smak/
-├── api/
-│   ├── config.php
-│   ├── index.php
-│   └── uploads/
 │
-├── assets/
-│   └── images/
+├── api/                     # Backend PHP dan API
+│   ├── config.php           # Konfigurasi koneksi database
+│   ├── index.php            # Endpoint utama API
+│   └── uploads/             # Penyimpanan media yang diunggah
 │
-├── database/
-│   └── migration SQL
+├── assets/                  # Asset statis aplikasi
 │
-├── docs/
+├── database/                # SQL dan migration database
 │
-├── lib/
-│   ├── admin/
-│   │   ├── akademik/
-│   │   ├── berita/
-│   │   ├── dashboard/
-│   │   ├── galeri/
-│   │   ├── kesiswaan/
-│   │   ├── kontak/
-│   │   ├── pengaturan_website/
-│   │   ├── pengguna/
-│   │   ├── ppdb/
-│   │   ├── profil/
-│   │   └── shared/
+├── docs/                    # Dokumentasi pendukung project
+│
+├── lib/                     # Source code utama Flutter
 │   │
-│   ├── landing_page/
-│   ├── routing/
-│   ├── services/
-│   └── main.dart
+│   ├── admin/               # Seluruh halaman Admin Dashboard
+│   │   ├── akademik/        # Pengelolaan konten akademik
+│   │   ├── berita/          # Pengelolaan berita
+│   │   ├── dashboard/       # Halaman utama administrator
+│   │   ├── galeri/          # Pengelolaan galeri dan media
+│   │   ├── kesiswaan/       # Pengelolaan konten kesiswaan
+│   │   ├── kontak/          # Pengelolaan informasi kontak
+│   │   ├── pengaturan_website/
+│   │   │                    # Konfigurasi dan pengaturan website
+│   │   ├── pengguna/        # Pengelolaan pengguna/admin
+│   │   ├── ppdb/            # Pengelolaan informasi PPDB
+│   │   ├── profil/          # Pengelolaan profil sekolah
+│   │   └── shared/          # Komponen bersama Admin Dashboard
+│   │
+│   ├── landing_page/        # Halaman website publik
+│   ├── routing/             # Navigasi dan konfigurasi URL
+│   ├── services/            # Komunikasi frontend dengan API
+│   └── main.dart            # Entry point aplikasi Flutter
 │
-├── test/
-├── web/
-├── android/
-├── ios/
-├── linux/
-├── macos/
-├── windows/
-├── pubspec.yaml
-└── README.md
+├── test/                    # Automated testing Flutter
+├── web/                     # Konfigurasi Flutter Web
+├── android/                 # Konfigurasi platform Android
+├── ios/                     # Konfigurasi platform iOS
+├── linux/                   # Konfigurasi platform Linux
+├── macos/                   # Konfigurasi platform macOS
+├── windows/                 # Konfigurasi platform Windows
+│
+├── pubspec.yaml             # Dependency dan konfigurasi Flutter
+└── README.md                # Dokumentasi repository
 ```
+
+### Penjelasan Bagian Utama
+
+#### `lib/` — Flutter Frontend
+
+Berisi source code utama aplikasi Flutter.
+
+Di dalamnya terdapat website publik yang digunakan oleh pengunjung dan Admin Dashboard yang digunakan administrator untuk mengelola website.
+
+#### `lib/admin/` — Admin Dashboard
+
+Berisi halaman dan fitur CMS untuk administrator.
+
+Setiap modul dipisahkan berdasarkan jenis konten, seperti akademik, berita, galeri, kesiswaan, PPDB, profil, pengguna, kontak, hingga Pengaturan Website.
+
+#### `lib/landing_page/` — Website Publik
+
+Berisi halaman yang ditampilkan kepada pengunjung.
+
+Konten halaman publik terintegrasi dengan backend sehingga perubahan yang dilakukan melalui Admin Dashboard dapat ditampilkan secara dinamis.
+
+#### `lib/routing/` — Routing
+
+Mengatur navigasi dan URL halaman pada Flutter Web sehingga halaman publik dapat menggunakan struktur URL yang lebih bersih.
+
+#### `lib/services/` — API Services
+
+Menangani komunikasi antara Flutter dengan backend PHP, termasuk proses mengambil, mengirim, dan memperbarui data.
+
+#### `api/` — PHP Backend
+
+Berfungsi sebagai penghubung antara Flutter Web dan database MySQL.
+
+Backend menangani request dari frontend, autentikasi administrator, pengelolaan data, monitoring aktivitas login, serta proses upload media.
+
+#### `database/` — Database & Migration
+
+Berisi file SQL yang digunakan untuk membuat atau memperbarui struktur database selama proses pengembangan.
+
+#### `assets/` — Assets
+
+Berisi berbagai asset statis yang digunakan oleh aplikasi Flutter.
+
+#### `web/` — Flutter Web Configuration
+
+Berisi konfigurasi yang diperlukan untuk menjalankan dan melakukan build aplikasi sebagai website.
+
+---
 
 ## 🔄 Pengelolaan Konten Dinamis
 
-Salah satu fokus utama project ini adalah mengurangi konten yang bersifat hardcoded pada frontend.
+Salah satu fokus utama project ini adalah mengurangi konten yang bersifat **hardcoded** pada frontend.
 
-Konten website dikelola melalui alur:
+Konten website dikelola menggunakan alur:
 
 ```text
 Admin Dashboard
@@ -190,22 +273,31 @@ Admin Dashboard
 Public Website
 ```
 
-Dengan pendekatan ini, administrator dapat memperbarui informasi website melalui dashboard tanpa perlu membuka atau mengubah source code Flutter.
+Administrator melakukan perubahan melalui Admin Dashboard.
+
+Data kemudian dikirim ke backend PHP dan disimpan pada database MySQL. Website publik mengambil data tersebut melalui API dan menampilkannya kepada pengunjung.
+
+Dengan pendekatan ini, administrator dapat memperbarui informasi website tanpa perlu membuka atau mengubah source code Flutter.
+
+---
 
 ## 🖼️ Pengelolaan Media
 
-Website mendukung penggunaan media untuk berbagai konten seperti:
+Website mendukung penggunaan dan pengelolaan media untuk berbagai jenis konten.
 
-- Banner halaman
-- Slider beranda
-- Galeri
+Media digunakan pada:
+
+- Banner dan slider beranda
+- Profil sekolah
 - Berita
+- Galeri
 - Prestasi
 - Ekstrakurikuler
-- Profil sekolah
-- Konten pendukung halaman lainnya
+- Konten halaman lainnya
 
 Media dapat diunggah melalui sistem pengelolaan konten dan kemudian digunakan oleh halaman website.
+
+---
 
 ## 🛣️ Routing
 
@@ -222,13 +314,15 @@ Contoh struktur route:
 /login
 ```
 
-Routing juga digunakan untuk mengatur navigasi antarhalaman pada Flutter Web.
+Routing juga digunakan untuk menangani navigasi antarhalaman di dalam Flutter Web.
+
+---
 
 ## 🔧 Konfigurasi Database
 
 Backend PHP menggunakan MySQL sebagai database.
 
-Konfigurasi database mendukung environment variable:
+Konfigurasi koneksi mendukung environment variable:
 
 ```text
 SMAK_DB_HOST
@@ -240,7 +334,9 @@ SMAK_DB_PORT
 
 Dengan pendekatan ini, credential database production tidak perlu disimpan secara langsung di dalam source code repository.
 
-## 🚀 Menjalankan Project
+---
+
+## 💻 Menjalankan Project
 
 ### 1. Clone Repository
 
@@ -254,9 +350,9 @@ Masuk ke folder project:
 cd flutter-smak-website
 ```
 
-### 2. Install Dependency Flutter
+### 2. Install Dependency
 
-Pastikan Flutter SDK sudah terinstall.
+Pastikan Flutter SDK sudah tersedia.
 
 Kemudian jalankan:
 
@@ -274,7 +370,7 @@ Backend membutuhkan:
 
 Untuk development lokal dapat menggunakan **Laragon** atau environment PHP/MySQL lainnya.
 
-Pastikan API dapat diakses sebelum menjalankan frontend.
+Pastikan database telah dikonfigurasi dan backend API dapat diakses oleh aplikasi Flutter.
 
 ### 4. Jalankan Flutter Web
 
@@ -282,11 +378,13 @@ Pastikan API dapat diakses sebelum menjalankan frontend.
 flutter run -d chrome
 ```
 
-Flutter akan menjalankan website melalui browser Chrome.
+Aplikasi kemudian akan dijalankan melalui browser Chrome.
+
+---
 
 ## 🌍 Deployment
 
-Frontend Flutter Web dapat dibuat menggunakan:
+Build production Flutter Web dapat dibuat menggunakan:
 
 ```bash
 flutter build web
@@ -298,9 +396,30 @@ Hasil build akan tersedia pada:
 build/web/
 ```
 
-Project dapat dideploy pada web server yang mendukung konfigurasi yang dibutuhkan oleh Flutter Web dan PHP API.
+File hasil build kemudian dapat dideploy ke web server.
 
-Backend PHP dan database MySQL perlu dikonfigurasi sesuai environment server yang digunakan.
+Backend PHP dan database MySQL perlu dikonfigurasi sesuai dengan environment server yang digunakan.
+
+Project ini menggunakan konfigurasi Apache melalui `.htaccess` untuk mendukung kebutuhan routing pada deployment web.
+
+---
+
+## 🔎 SEO & Website Configuration
+
+Project menyediakan konfigurasi dasar untuk mendukung kebutuhan website publik, seperti:
+
+- Website title
+- Meta description
+- Keywords
+- Canonical URL
+- Open Graph metadata
+- Identitas website
+- Favicon
+- Pengaturan status website
+
+Sebagian pengaturan website dapat dikelola melalui Admin Dashboard.
+
+---
 
 ## 🎯 Tujuan Pengembangan
 
@@ -311,17 +430,23 @@ Pengembangan project mencakup:
 - Perancangan UI website
 - Responsive design
 - Pengembangan frontend menggunakan Flutter Web
-- Pengembangan Admin Dashboard
+- Pengembangan Admin Dashboard / CMS
 - Integrasi frontend dengan PHP API
 - Pengelolaan database MySQL
+- Pengelolaan konten dinamis
 - Sistem pengelolaan media
 - Authentication administrator
 - Monitoring aktivitas login
+- Pencatatan login berhasil dan gagal
+- Pencatatan alamat IP
 - Routing halaman
-- Pengaturan website
+- Pengaturan Website
 - SEO dasar
 - Maintenance mode
 - Deployment website
+- Version control menggunakan Git
+
+---
 
 ## 👨‍💻 Developer
 
@@ -332,4 +457,4 @@ Politeknik Negeri Malang PSDKU Lumajang
 
 ---
 
-Built with 💙💙💙 using **Flutter**.
+Built with 💙 using **Flutter**.
